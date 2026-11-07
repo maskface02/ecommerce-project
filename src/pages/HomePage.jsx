@@ -2,18 +2,18 @@ import axios from "axios";
 import { Header } from "../components/Header";
 import { useEffect, useState } from "react";
 import "./HomePage.css";
+import { formatMoney } from "../utils/money";
 
-export function HomePage({cart}) {
+export function HomePage({ cart }) {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     axios.get("/api/products").then((response) => {
       setProducts(response.data);
     });
-
   }, []);
   return (
     <>
-      <Header  cart={cart}/>
+      <Header cart={cart} />
       <div className="home-page">
         <div className="products-grid">
           {products.map((product) => {
@@ -38,7 +38,7 @@ export function HomePage({cart}) {
                 </div>
 
                 <div className="product-price">
-                  ${(product.priceCents / 100).toFixed(2)}
+                  {formatMoney(product.priceCents)}
                 </div>
 
                 <div className="product-quantity-container">
