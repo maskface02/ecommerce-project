@@ -1,9 +1,10 @@
 import express from 'express';
 import { DeliveryOption } from '../models/DeliveryOption.js';
+import { asyncHandler } from '../asyncHandler.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const expand = req.query.expand;
   const deliveryOptions = await DeliveryOption.findAll();
   let response = deliveryOptions;
@@ -19,6 +20,6 @@ router.get('/', async (req, res) => {
   }
 
   res.json(response);
-});
+}));
 
 export default router;

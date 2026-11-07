@@ -1,9 +1,10 @@
 import express from 'express';
 import { Product } from '../models/Product.js';
+import { asyncHandler } from '../asyncHandler.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const search = req.query.search;
 
   let products;
@@ -26,6 +27,6 @@ router.get('/', async (req, res) => {
   }
 
   res.json(products);
-});
+}));
 
 export default router;

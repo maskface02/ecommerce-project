@@ -3,10 +3,11 @@ import { Order } from '../models/Order.js';
 import { Product } from '../models/Product.js';
 import { DeliveryOption } from '../models/DeliveryOption.js';
 import { CartItem } from '../models/CartItem.js';
+import { asyncHandler } from '../asyncHandler.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const expand = req.query.expand;
   let orders = await Order.unscoped().findAll({ order: [['orderTimeMs', 'DESC']] }); // Sort by most recent
 
@@ -27,9 +28,9 @@ router.get('/', async (req, res) => {
   }
 
   res.json(orders);
-});
+}));
 
-router.post('/', async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
   const cartItems = await CartItem.findAll();
 
   if (cartItems.length === 0) {
@@ -68,9 +69,9 @@ router.post('/', async (req, res) => {
   await CartItem.destroy({ where: {} });
 
   res.status(201).json(order);
-});
+}));
 
-router.get('/:orderId', async (req, res) => {
+router.get('/:orderId', asyncHandler(async (req, res) => {
   const { orderId } = req.params;
   const expand = req.query.expand;
 
@@ -94,6 +95,6 @@ router.get('/:orderId', async (req, res) => {
   }
 
   res.json(order);
-});
+}));
 
 export default router;

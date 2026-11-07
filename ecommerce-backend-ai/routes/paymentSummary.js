@@ -2,10 +2,11 @@ import express from 'express';
 import { CartItem } from '../models/CartItem.js';
 import { Product } from '../models/Product.js';
 import { DeliveryOption } from '../models/DeliveryOption.js';
+import { asyncHandler } from '../asyncHandler.js';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const cartItems = await CartItem.findAll();
   let totalItems = 0;
   let productCostCents = 0;
@@ -31,6 +32,6 @@ router.get('/', async (req, res) => {
     taxCents,
     totalCostCents
   });
-});
+}));
 
 export default router;

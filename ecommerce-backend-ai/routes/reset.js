@@ -8,10 +8,11 @@ import { defaultProducts } from '../defaultData/defaultProducts.js';
 import { defaultDeliveryOptions } from '../defaultData/defaultDeliveryOptions.js';
 import { defaultCart } from '../defaultData/defaultCart.js';
 import { defaultOrders } from '../defaultData/defaultOrders.js';
+import { asyncHandler } from '../asyncHandler.js';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
   await sequelize.sync({ force: true });
 
   const timestamp = Date.now();
@@ -46,6 +47,6 @@ router.post('/', async (req, res) => {
   await Order.bulkCreate(ordersWithTimestamps);
 
   res.status(204).send();
-});
+}));
 
 export default router;
