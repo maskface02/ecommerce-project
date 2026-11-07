@@ -1,13 +1,13 @@
+import axios from "axios";
 import { Header } from "../components/Header";
+import { useEffect } from "react"; 
 import { products } from "../../starting-code/data/products";
 import "./HomePage.css";
 
 export function HomePage() {
-  fetch("http://localhost:4000/api/products").then((response) => {
-    response.json().then((data) => {
-      console.log(data);
+  axios.get("http://localhost:4000/api/products").then((response) => {
+      console.log(response.data);
     });
-  });
   return (
     <>
       <Header />
