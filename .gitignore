@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
+ecommerce-backend-ai/database.sqlite
 node_modules
 dist
 dist-ssr
