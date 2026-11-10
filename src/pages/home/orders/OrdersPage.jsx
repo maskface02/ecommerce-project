@@ -6,7 +6,7 @@ import { OrderDetailsGrid } from "./OrderDetailsGrid";
 import { OrderHeaderRightSection } from "./OrderHeaderRightSection";
 import { OrderHeaderLeftSection } from "./OrderHeaderLeftSection";
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, loadCart }) {
   const [orders, setOrders] = useState([]);
   useEffect(() => {
     const getOrders = async () => {
@@ -31,7 +31,7 @@ export function OrdersPage({ cart }) {
                   <OrderHeaderLeftSection order={order} />
                   <OrderHeaderRightSection order={order} />
                 </div>
-                <OrderDetailsGrid order={order} />
+                <OrderDetailsGrid order={order}  loadCart={loadCart}/>
               </div>
             );
           })}
